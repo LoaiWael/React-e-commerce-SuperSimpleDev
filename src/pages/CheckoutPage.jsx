@@ -4,6 +4,8 @@ import './CheckoutPage.css';
 export default function CheckoutPage() {
   return (
     <>
+      <title>E-commerce | Checkout</title>
+
       <CheckoutHeader />
 
       <div className="checkout-page">

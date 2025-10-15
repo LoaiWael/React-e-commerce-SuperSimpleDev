@@ -4,6 +4,8 @@ import './TrackingPage.css'
 export default function TrackingPage() {
   return (
     <>
+      <title>E-commerce | Tracking</title>
+
       <Header />
       <div className="tracking-page">
         <div className="order-tracking">

@@ -4,6 +4,8 @@ import Header from '../components/Header';
 export default function HomePage() {
   return (
     <>
+      <title>E-commerce | Home</title>
+
       <Header />
       <div className="home-page">
         <div className="products-grid">
