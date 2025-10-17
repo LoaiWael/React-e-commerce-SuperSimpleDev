@@ -1,10 +1,13 @@
+import { Link } from 'react-router';
 import Header from '../components/Header';
+import buyAgainIcon from '../assets/images/icons/buy-again.png';
 import './OrdersPage.css';
 
 export default function OrdersPage() {
   return (
     <>
-      <title>E-commerce | Orders</title>
+      <title>Orders | E-commerce</title>
+      <link rel="icon" href="favicons/orders-favicon.png" />
 
       <Header />
 
@@ -48,17 +51,17 @@ export default function OrdersPage() {
                   Quantity: 1
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src={buyAgainIcon} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
 
               <div className="product-actions">
-                <a href="tracking.html">
+                <Link to="/tracking">
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
 
               <div className="product-image-container">
@@ -76,17 +79,17 @@ export default function OrdersPage() {
                   Quantity: 2
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src={buyAgainIcon} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
 
               <div className="product-actions">
-                <a href="tracking.html">
+                <Link to="/tracking">
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -127,17 +130,17 @@ export default function OrdersPage() {
                   Quantity: 2
                 </div>
                 <button className="buy-again-button button-primary">
-                  <img className="buy-again-icon" src="images/icons/buy-again.png" />
+                  <img className="buy-again-icon" src={buyAgainIcon} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
 
               <div className="product-actions">
-                <a href="tracking.html">
+                <Link to="/tracking">
                   <button className="track-package-button button-secondary">
                     Track package
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

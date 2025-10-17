@@ -1,10 +1,11 @@
-import CheckoutHeader from '../components/CheckoutHeader';
+import CheckoutHeader from './CheckoutHeader';
 import './CheckoutPage.css';
 
 export default function CheckoutPage() {
   return (
     <>
-      <title>E-commerce | Checkout</title>
+      <title>Checkout | E-commerce</title>
+      <link rel="icon" href="favicons/cart-favicon.png" />
 
       <CheckoutHeader />
 
