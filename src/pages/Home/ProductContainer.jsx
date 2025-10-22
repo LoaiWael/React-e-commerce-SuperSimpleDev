@@ -20,7 +20,7 @@ export default function ProductContainer({ name, image, rating, price }) {
       </div>
 
       <div className="product-price">
-        ${price}
+        {price}
       </div>
 
       <div className="product-quantity-container">

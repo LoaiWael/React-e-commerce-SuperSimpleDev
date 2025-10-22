@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../../components/Header';
 import ProductContainer from './ProductContainer';
+import { calculateCartQuantity } from '../../utils/cart';
+import { formatCurrency } from '../../utils/money';
 import './HomePage.css';
 
 export default function HomePage({ cart }) {
@@ -27,19 +29,11 @@ export default function HomePage({ cart }) {
             image={product.image}
             name={product.name}
             rating={product.rating}
-            price={(product.priceCents / 100).toFixed(2)}
+            price={formatCurrency(product.priceCents)}
             keywords={product.keywords}
           />)}
         </div>
       </div>
     </>
   )
-}
-
-function calculateCartQuantity(cart) {
-  let counter = 0;
-  cart.forEach(cartItem => {
-    counter += cartItem.quantity;
-  });
-  return counter;
 }
