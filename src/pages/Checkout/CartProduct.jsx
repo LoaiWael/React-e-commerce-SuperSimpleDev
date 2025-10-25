@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
+import axios from 'axios'
 import DeliveryOption from './DeliveryOption'
 import './CartProduct.css'
 
-export default function CartProduct({ productName, productImage, productPrice, quantity, deliveryOptionId, deliveryOptions }) {
+export default function CartProduct({ productName, productImage, productPrice, quantity, deliveryOptionId }) {
   const [productDeliveryOptionId, setProductDeliveryOptionId] = useState(deliveryOptionId)
+  const [deliveryOptions, setDeliveryOptions] = useState([]);
+  useEffect(() => {
+    axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
+      .then(response => setDeliveryOptions(response.data));
+  }, []);
 
   return (
     <div className="cart-item-container">
       <div className="delivery-date">
-        Delivery date: {dayjs(deliveryOptions?.find(option => option.id === productDeliveryOptionId).estimatedDeliveryTimeMs).format('dddd, MMMM DD')}
+        Delivery date: {dayjs(deliveryOptions.find(option => option.id === productDeliveryOptionId)?.estimatedDeliveryTimeMs).format('dddd, MMMM DD')}
       </div>
 
       <div className="cart-item-details-grid">

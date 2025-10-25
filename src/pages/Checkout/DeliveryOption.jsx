@@ -8,7 +8,7 @@ export default function DeliveryOption({ id, estimatedDeliveryTimeMs, price, pro
       <input type="radio" checked={productDeliveryOptionId === id}
         className="delivery-option-input"
         name={`delivery-option-${id}`}
-        onClick={() => setProductDeliveryOptionId(id)}
+        onChange={() => setProductDeliveryOptionId(id)}
       />
       <div>
         <div className="delivery-option-date">
