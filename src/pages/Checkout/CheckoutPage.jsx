@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios'
 import CheckoutHeader from './CheckoutHeader';
 import CartProduct from './CartProduct';
 import { calculateCartQuantity } from '../../utils/cart';
@@ -5,6 +7,11 @@ import { formatCurrency } from '../../utils/money'
 import './CheckoutPage.css';
 
 export default function CheckoutPage({ cart }) {
+  const [deliveryOptions, setDeliveryOptions] = useState([]);
+  useEffect(() => {
+    axios.get('/api/delivery-options?expand=estimatedDeliveryTime').then(response => setDeliveryOptions(response.data));
+  }, []);
+
   return (
     <>
       <title>Checkout | E-commerce</title>
@@ -19,11 +26,13 @@ export default function CheckoutPage({ cart }) {
           <div className="order-summary">
             {cart.map(item =>
               <CartProduct
+                key={item.id}
                 productName={item.product.name}
                 productImage={item.product.image}
                 productPrice={formatCurrency(item.product.priceCents)}
                 quantity={item.quantity}
                 deliveryOptionId={item.deliveryOptionId}
+                deliveryOptions={deliveryOptions}
               />
             )}
           </div>
