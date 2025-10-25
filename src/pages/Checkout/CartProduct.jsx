@@ -9,7 +9,7 @@ export default function CartProduct({ productName, productImage, productPrice, q
   return (
     <div className="cart-item-container">
       <div className="delivery-date">
-        Delivery date: {dayjs(deliveryOptions.find(option => option.id === productDeliveryOptionId).estimatedDeliveryTimeMs).format('dddd, MMMM DD')}
+        Delivery date: {dayjs(deliveryOptions?.find(option => option.id === productDeliveryOptionId).estimatedDeliveryTimeMs).format('dddd, MMMM DD')}
       </div>
 
       <div className="cart-item-details-grid">
