@@ -12,7 +12,7 @@ export default function DeliveryOption({ id, estimatedDeliveryTimeMs, price, pro
       />
       <div>
         <div className="delivery-option-date">
-          {dayjs(estimatedDeliveryTimeMs).format('dddd, MMMM DD')}
+          {dayjs(estimatedDeliveryTimeMs).format('dddd, MMMM D')}
         </div>
         <div className="delivery-option-price">
           {price === 0 ? 'FREE Shipping' : `${formatCurrency(price)} - Shipping`}

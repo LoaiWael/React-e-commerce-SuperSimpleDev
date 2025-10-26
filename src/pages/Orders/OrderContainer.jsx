@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router';
 import dayjs from 'dayjs'
 import { formatCurrency } from '../../utils/money'
@@ -12,7 +13,7 @@ export default function OrderContainer({ id, orderTimeMs, totalCostCents, produc
         <div className="order-header-left-section">
           <div className="order-date">
             <div className="order-header-label">Order Placed:</div>
-            <div>{dayjs(orderTimeMs).format('MMMM DD')}</div>
+            <div>{dayjs(orderTimeMs).format('MMMM D')}</div>
           </div>
           <div className="order-total">
             <div className="order-header-label">Total:</div>
@@ -29,7 +30,7 @@ export default function OrderContainer({ id, orderTimeMs, totalCostCents, produc
       <div className="order-details-grid">
         {products.map(list =>
         (
-          <>
+          <Fragment key={list.product.id}>
             <div className="product-image-container">
               <img src={list.product.image} />
             </div>
@@ -57,7 +58,7 @@ export default function OrderContainer({ id, orderTimeMs, totalCostCents, produc
                 </button>
               </Link>
             </div>
-          </>
+          </Fragment>
         )
         )}
       </div>
