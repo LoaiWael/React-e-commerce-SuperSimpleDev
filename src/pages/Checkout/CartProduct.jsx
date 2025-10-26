@@ -2,14 +2,20 @@ import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import DeliveryOption from './DeliveryOption'
+import { formatCurrency } from '../../utils/money';
 import './CartProduct.css'
 
-export default function CartProduct({ productName, productImage, productPrice, quantity, deliveryOptionId }) {
+export default function CartProduct({ productName, productImage, productPriceCents, quantity, deliveryOptionId }) {
   const [productDeliveryOptionId, setProductDeliveryOptionId] = useState(deliveryOptionId)
   const [deliveryOptions, setDeliveryOptions] = useState([]);
+
   useEffect(() => {
-    axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
-      .then(response => setDeliveryOptions(response.data));
+    const fetchDeliveryOptions = async () => {
+      const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime');
+      setDeliveryOptions(response.data);
+    }
+
+    fetchDeliveryOptions();
   }, []);
 
   return (
@@ -27,7 +33,7 @@ export default function CartProduct({ productName, productImage, productPrice, q
             {productName}
           </div>
           <div className="product-price">
-            {productPrice}
+            {formatCurrency(productPriceCents)}
           </div>
           <div className="product-quantity">
             <span>
