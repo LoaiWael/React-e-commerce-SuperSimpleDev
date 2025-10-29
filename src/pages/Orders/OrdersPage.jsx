@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
-import { calculateCartQuantity } from '../../utils/cart';
 import OrderContainer from './OrderContainer';
 import Header from '../../components/Header';
 import './OrdersPage.css';
@@ -22,7 +21,7 @@ export default function OrdersPage({ cart }) {
       <title>Orders | E-commerce</title>
       <link rel="icon" href="favicons/orders-favicon.png" />
 
-      <Header cartQuantity={calculateCartQuantity(cart)} />
+      <Header cart={cart} />
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>

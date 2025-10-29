@@ -2,13 +2,13 @@ import Header from '../components/Header';
 import logo from '../assets/images/mobile-logo.png'
 import './NotFoundPage.css';
 
-export default function NotFoundPage() {
+export default function NotFoundPage({ cart }) {
   return (
     <>
       <title>Error 404</title>
       <link rel="icon" href={logo} />
 
-      <Header />
+      <Header cart={cart} />
       <section className='page-body'>
         <h1>Error 404</h1>
         <p>Page not found</p>

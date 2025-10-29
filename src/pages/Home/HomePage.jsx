@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Header from '../../components/Header';
 import ProductContainer from './ProductContainer';
-import { calculateCartQuantity } from '../../utils/cart';
 import { formatCurrency } from '../../utils/money';
 import './HomePage.css';
 
@@ -23,7 +22,7 @@ export default function HomePage({ cart }) {
       <title>Home | E-commerce</title>
       <link rel="icon" href="favicons/home-favicon.png" />
 
-      <Header cartQuantity={calculateCartQuantity(cart)} />
+      <Header cart={cart} />
 
       <div className="home-page">
         <div className="products-grid">
