@@ -1,21 +1,11 @@
-import { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import DeliveryOption from './DeliveryOption'
 import { formatCurrency } from '../../utils/money';
 import './CartProduct.css'
 
-export default function CartProduct({ cartItemId, productId, productName, productImage, productPriceCents, quantity, deliveryOptionId, loadCart }) {
-  const [deliveryOptions, setDeliveryOptions] = useState([]);
+export default function CartProduct({ cartItemId, productId, productName, productImage, productPriceCents, quantity, deliveryOptions, deliveryOptionId, loadCart }) {
 
-  useEffect(() => {
-    const fetchDeliveryOptions = async () => {
-      const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime');
-      setDeliveryOptions(response.data);
-    }
-
-    fetchDeliveryOptions();
-  }, []);
 
   const deleteCartProduct = async () => {
     await axios.delete(`/api/cart-items/${productId}`);

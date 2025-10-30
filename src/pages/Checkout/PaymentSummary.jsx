@@ -1,7 +1,23 @@
+import axios from 'axios'
+import dayjs from 'dayjs'
 import { formatCurrency } from '../../utils/money'
 import './PaymentSummary.css'
 
-export default function PaymentSummary({ paymentSummary }) {
+export default function PaymentSummary({ paymentSummary, cart, deliveryOptions, loadCart }) {
+  const placeOrder = async () => {
+    await axios.post('/api/orders', {
+      id: crypto.randomUUID(),
+      orderTimeMs: dayjs().valueOf(),
+      totalCostCents: Number(paymentSummary.totalCostCents),
+      products: cart.map(cartItem => ({
+        productId: cartItem.productId,
+        quantity: cartItem.quantity,
+        estimatedDeliveryTimeMs: deliveryOptions.find(option => option.id == cartItem.deliveryOptionId).estimatedDeliveryTimeMs
+      }))
+    });
+    await loadCart();
+  }
+
   return (
     <>
       <div className="payment-summary-title">
@@ -33,7 +49,7 @@ export default function PaymentSummary({ paymentSummary }) {
         <div className="payment-summary-money">{formatCurrency(paymentSummary.totalCostCents)}</div>
       </div>
 
-      <button className="place-order-button button-primary">
+      <button className="place-order-button button-primary" onClick={placeOrder}>
         Place your order
       </button>
     </>

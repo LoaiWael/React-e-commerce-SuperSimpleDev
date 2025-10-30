@@ -44,7 +44,7 @@ export default function TrackingPage({ cart }) {
             </Link>
 
             <div className="delivery-date">
-              {deliveryState === 100 ? 'Delivered on' : 'Arriving on'} {dayjs(orderedProduct.orderTimeMs).format('dddd, MMMM D')}
+              {deliveryState === 100 ? 'Delivered on' : 'Arriving on'} {dayjs(orderedProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
             </div>
 
             <div className="product-info">
