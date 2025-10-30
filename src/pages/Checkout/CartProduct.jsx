@@ -17,6 +17,11 @@ export default function CartProduct({ cartItemId, productId, productName, produc
     fetchDeliveryOptions();
   }, []);
 
+  const deleteCartProduct = async () => {
+    await axios.delete(`/api/cart-items/${productId}`);
+    await loadCart();
+  }
+
   return (
     <div className="cart-item-container">
       <div className="delivery-date">
@@ -41,7 +46,7 @@ export default function CartProduct({ cartItemId, productId, productName, produc
             <span className="update-quantity-link link-primary">
               Update
             </span>
-            <span className="delete-quantity-link link-primary">
+            <span className="delete-quantity-link link-primary" onClick={deleteCartProduct}>
               Delete
             </span>
           </div>

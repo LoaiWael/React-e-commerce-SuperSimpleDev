@@ -16,7 +16,7 @@ export default function CheckoutPage({ cart, loadCart }) {
     }
 
     fetchPaymentSummary();
-  }, []);
+  }, [cart]);
 
   return (
     <>

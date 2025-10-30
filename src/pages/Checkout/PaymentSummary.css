@@ -1,4 +1,6 @@
 .checkout-page .payment-summary {
+  position: sticky;
+  top: 65px;
   padding-bottom: 5px;
 }
 

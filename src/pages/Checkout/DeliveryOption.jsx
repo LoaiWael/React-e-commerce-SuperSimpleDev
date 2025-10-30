@@ -12,7 +12,7 @@ export default function DeliveryOption({ id, cartItemId, productId, estimatedDel
   }
 
   return (
-    <div className="delivery-option" onClick={() => updateDeliveryOption()}>
+    <div className="delivery-option" onClick={updateDeliveryOption}>
       <input type="radio" checked={deliveryOptionId === id}
         className="delivery-option-input"
         name={`delivery-option-${cartItemId}`}
