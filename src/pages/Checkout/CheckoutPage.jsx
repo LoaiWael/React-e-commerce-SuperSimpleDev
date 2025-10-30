@@ -6,7 +6,7 @@ import PaymentSummary from './PaymentSummary';
 import { calculateCartQuantity } from '../../utils/cart';
 import './CheckoutPage.css';
 
-export default function CheckoutPage({ cart }) {
+export default function CheckoutPage({ cart, loadCart }) {
   const [paymentSummary, setPaymentSummary] = useState({});
 
   useEffect(() => {
@@ -33,11 +33,14 @@ export default function CheckoutPage({ cart }) {
             {cart.map(item =>
               <CartProduct
                 key={item.id}
+                cartItemId={item.id}
+                productId={item.productId}
                 productName={item.product.name}
                 productImage={item.product.image}
                 productPriceCents={item.product.priceCents}
                 quantity={item.quantity}
                 deliveryOptionId={item.deliveryOptionId}
+                loadCart={loadCart}
               />
             )}
           </div>

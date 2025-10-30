@@ -1,7 +1,24 @@
+import { useRef, useState } from 'react';
+import axios from 'axios';
 import checkMark from '../../assets/images/icons/checkmark.png'
 import './ProductContainer.css'
 
-export default function ProductContainer({ name, image, rating, price }) {
+export default function ProductContainer({ productId, name, image, rating, price, loadCart }) {
+  const [quantity, setQuantity] = useState(1);
+  const addedToCartInfoElem = useRef(null);
+
+  const addToCart = async (productId, quantity) => {
+    await axios.post('/api/cart-items', {
+      productId,
+      quantity
+    });
+    await loadCart();
+    addedToCartInfoElem.current.style = { opacity: 1 }
+    setTimeout(() => {
+      addedToCartInfoElem.current.style = { opacity: 0 }
+    }, 1000)
+  }
+
   return (
     <div className="product-container">
       <div className="product-image-container">
@@ -24,7 +41,7 @@ export default function ProductContainer({ name, image, rating, price }) {
       </div>
 
       <div className="product-quantity-container">
-        <select>
+        <select value={quantity} onChange={e => setQuantity(Number(e.target.value))}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -40,12 +57,12 @@ export default function ProductContainer({ name, image, rating, price }) {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div className="added-to-cart" ref={addedToCartInfoElem}>
         <img src={checkMark} />
         Added
       </div>
 
-      <button className="add-to-cart-button button-primary">
+      <button className="add-to-cart-button button-primary" onClick={() => addToCart(productId, quantity)}>
         Add to Cart
       </button>
     </div>

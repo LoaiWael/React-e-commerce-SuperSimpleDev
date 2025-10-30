@@ -5,8 +5,7 @@ import DeliveryOption from './DeliveryOption'
 import { formatCurrency } from '../../utils/money';
 import './CartProduct.css'
 
-export default function CartProduct({ productName, productImage, productPriceCents, quantity, deliveryOptionId }) {
-  const [productDeliveryOptionId, setProductDeliveryOptionId] = useState(deliveryOptionId)
+export default function CartProduct({ cartItemId, productId, productName, productImage, productPriceCents, quantity, deliveryOptionId, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export default function CartProduct({ productName, productImage, productPriceCen
   return (
     <div className="cart-item-container">
       <div className="delivery-date">
-        Delivery date: {dayjs(deliveryOptions.find(option => option.id === productDeliveryOptionId)?.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
+        Delivery date: {dayjs(deliveryOptions.find(option => option.id === deliveryOptionId)?.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
       </div>
 
       <div className="cart-item-details-grid">
@@ -56,10 +55,12 @@ export default function CartProduct({ productName, productImage, productPriceCen
             <DeliveryOption
               key={option.id}
               id={option.id}
+              productId={productId}
+              cartItemId={cartItemId}
               estimatedDeliveryTimeMs={option.estimatedDeliveryTimeMs}
               price={option.priceCents}
-              productDeliveryOptionId={productDeliveryOptionId}
-              setProductDeliveryOptionId={setProductDeliveryOptionId}
+              deliveryOptionId={deliveryOptionId}
+              loadCart={loadCart}
             />
           )}
         </div>

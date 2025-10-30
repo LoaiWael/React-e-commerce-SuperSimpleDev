@@ -5,7 +5,7 @@ import ProductContainer from './ProductContainer';
 import { formatCurrency } from '../../utils/money';
 import './HomePage.css';
 
-export default function HomePage({ cart }) {
+export default function HomePage({ cart, loadCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -28,11 +28,13 @@ export default function HomePage({ cart }) {
         <div className="products-grid">
           {products.map(product => <ProductContainer
             key={product.id}
+            productId={product.id}
             image={product.image}
             name={product.name}
             rating={product.rating}
             price={formatCurrency(product.priceCents)}
             keywords={product.keywords}
+            loadCart={loadCart}
           />)}
         </div>
       </div>
