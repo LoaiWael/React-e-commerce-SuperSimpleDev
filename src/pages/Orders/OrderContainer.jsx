@@ -11,7 +11,7 @@ export default function OrderContainer({ id, orderTimeMs, totalCostCents, produc
       <div className="order-details-grid">
         {products.map(list =>
         (
-          <OrderedProduct key={list.productId} orderId={id} productDetails={list.product} quantity={list.quantity} />
+          <OrderedProduct key={list.productId} orderId={id} estimatedDeliveryTimeMs={list.estimatedDeliveryTimeMs} productDetails={list.product} quantity={list.quantity} />
         )
         )}
       </div>

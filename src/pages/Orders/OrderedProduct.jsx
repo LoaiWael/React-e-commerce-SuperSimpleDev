@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import buyAgainIcon from '../../assets/images/icons/buy-again.png';
 import './OrderedProduct.css'
 
-export default function OrderedProduct({ orderId, productDetails, quantity }) {
+export default function OrderedProduct({ orderId, estimatedDeliveryTimeMs, productDetails, quantity }) {
   return (
     <>
       <div className="product-image-container">
@@ -15,7 +15,7 @@ export default function OrderedProduct({ orderId, productDetails, quantity }) {
           {productDetails.name}
         </div>
         <div className="product-delivery-date">
-          Arriving on: {dayjs(productDetails.estimatedDeliveryTimeMs).format('MMMM DD')}
+          Arriving on: {dayjs(estimatedDeliveryTimeMs).format('MMMM DD')}
         </div>
         <div className="product-quantity">
           Quantity: {quantity}

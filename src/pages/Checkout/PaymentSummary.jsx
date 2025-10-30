@@ -1,21 +1,17 @@
 import axios from 'axios'
-import dayjs from 'dayjs'
+import { useNavigate } from 'react-router'
 import { formatCurrency } from '../../utils/money'
 import './PaymentSummary.css'
 
-export default function PaymentSummary({ paymentSummary, cart, deliveryOptions, loadCart }) {
+export default function PaymentSummary({ paymentSummary, loadCart }) {
+  const navigate = useNavigate();
+
   const placeOrder = async () => {
-    await axios.post('/api/orders', {
-      id: crypto.randomUUID(),
-      orderTimeMs: dayjs().valueOf(),
-      totalCostCents: Number(paymentSummary.totalCostCents),
-      products: cart.map(cartItem => ({
-        productId: cartItem.productId,
-        quantity: cartItem.quantity,
-        estimatedDeliveryTimeMs: deliveryOptions.find(option => option.id == cartItem.deliveryOptionId).estimatedDeliveryTimeMs
-      }))
-    });
+    await axios.post('/api/orders');
     await loadCart();
+    setTimeout(() => {
+      navigate('/orders');
+    }, 1000);
   }
 
   return (
