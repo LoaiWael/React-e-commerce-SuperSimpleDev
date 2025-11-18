@@ -1,20 +1,34 @@
-import OrderHeader from './OrderHeader';
-import OrderedProduct from './OrderedProduct';
-import './OrderContainer.css';
+import OrderHeader from "./OrderHeader";
+import OrderedProduct from "./OrderedProduct";
+import "./OrderContainer.css";
 
-export default function OrderContainer({ id, orderTimeMs, totalCostCents, products }) {
+export default function OrderContainer({
+  id,
+  orderTimeMs,
+  totalCostCents,
+  products,
+  loadCart,
+}) {
   return (
     <div className="order-container">
-
-      <OrderHeader id={id} orderTimeMs={orderTimeMs} totalCostCents={totalCostCents} />
+      <OrderHeader
+        id={id}
+        orderTimeMs={orderTimeMs}
+        totalCostCents={totalCostCents}
+      />
 
       <div className="order-details-grid">
-        {products.map(list =>
-        (
-          <OrderedProduct key={list.productId} orderId={id} estimatedDeliveryTimeMs={list.estimatedDeliveryTimeMs} productDetails={list.product} quantity={list.quantity} />
-        )
-        )}
+        {products.map((list) => (
+          <OrderedProduct
+            key={list.productId}
+            orderId={id}
+            estimatedDeliveryTimeMs={list.estimatedDeliveryTimeMs}
+            productDetails={list.product}
+            quantity={list.quantity}
+            loadCart={loadCart}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }

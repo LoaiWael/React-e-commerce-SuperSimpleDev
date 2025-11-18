@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios'
-import OrderContainer from './OrderContainer';
-import Header from '../../components/Header';
-import './OrdersPage.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import OrderContainer from "./OrderContainer";
+import Header from "../../components/Header";
+import "./OrdersPage.css";
 
-export default function OrdersPage({ cart }) {
+export default function OrdersPage({ cart, loadCart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await axios.get('/api/orders?expand=products');
+      const response = await axios.get("/api/orders?expand=products");
       setOrders(response.data);
-    }
+    };
 
     fetchOrders();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -27,16 +27,18 @@ export default function OrdersPage({ cart }) {
         <div className="page-title">Your Orders</div>
 
         <div className="orders-grid">
-          {orders.map(order =>
-          (<OrderContainer
-            key={order.id}
-            id={order.id}
-            orderTimeMs={order.orderTimeMs}
-            totalCostCents={order.totalCostCents}
-            products={order.products}
-          />))}
+          {orders.map((order) => (
+            <OrderContainer
+              key={order.id}
+              id={order.id}
+              orderTimeMs={order.orderTimeMs}
+              totalCostCents={order.totalCostCents}
+              products={order.products}
+              loadCart={loadCart}
+            />
+          ))}
         </div>
       </div>
     </>
-  )
+  );
 }
