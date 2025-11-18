@@ -17,10 +17,10 @@ export default function ProductContainer({
   const handleAddToCart = async (productId, quantity, loadCart) => {
     await addToCart(productId, quantity, loadCart);
 
-    addedToCartInfoElem.current.style = { opacity: 1 };
+    addedToCartInfoElem.current.style.opacity = 1;
     setTimeout(() => {
-      addedToCartInfoElem.current.style = { opacity: 0 };
-    }, 1000);
+      addedToCartInfoElem.current.style.opacity = 0;
+    }, 1500);
   };
 
   return (

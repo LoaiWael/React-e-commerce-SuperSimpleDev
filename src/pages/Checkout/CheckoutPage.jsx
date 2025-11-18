@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios'
-import CheckoutHeader from './CheckoutHeader';
-import CartProduct from './CartProduct';
-import PaymentSummary from './PaymentSummary';
-import { calculateCartQuantity } from '../../utils/cart';
-import './CheckoutPage.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import CheckoutHeader from "./CheckoutHeader";
+import CartProduct from "./CartProduct";
+import PaymentSummary from "./PaymentSummary";
+import { calculateCartQuantity } from "../../utils/cart";
+import "./CheckoutPage.css";
 
 export default function CheckoutPage({ cart, loadCart }) {
   const [paymentSummary, setPaymentSummary] = useState({});
@@ -12,17 +12,19 @@ export default function CheckoutPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchDeliveryOptions = async () => {
-      const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime');
+      const response = await axios.get(
+        "/api/delivery-options?expand=estimatedDeliveryTime"
+      );
       setDeliveryOptions(response.data);
-    }
+    };
 
     fetchDeliveryOptions();
   }, []);
   useEffect(() => {
     const fetchPaymentSummary = async () => {
-      const response = await axios.get('/api/payment-summary')
+      const response = await axios.get("/api/payment-summary");
       setPaymentSummary(response.data);
-    }
+    };
 
     fetchPaymentSummary();
   }, [cart]);
@@ -39,7 +41,7 @@ export default function CheckoutPage({ cart, loadCart }) {
 
         <div className="checkout-grid">
           <div className="order-summary">
-            {cart.map(item =>
+            {cart.map((item) => (
               <CartProduct
                 key={item.id}
                 cartItemId={item.id}
@@ -52,7 +54,7 @@ export default function CheckoutPage({ cart, loadCart }) {
                 deliveryOptions={deliveryOptions}
                 loadCart={loadCart}
               />
-            )}
+            ))}
           </div>
           <div className="payment-summary">
             <PaymentSummary
@@ -65,5 +67,5 @@ export default function CheckoutPage({ cart, loadCart }) {
         </div>
       </div>
     </>
-  )
+  );
 }
