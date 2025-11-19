@@ -41,6 +41,15 @@ export default function CartProduct({
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key == "Enter") {
+      updateQuantity(Number(e.target.value));
+    } else if (e.key == "Escape") {
+      currentQuantityElem.current.style.display = "unset";
+      setWantUpdateQuantity(false);
+    }
+  };
+
   return (
     <div className="cart-item-container">
       <div className="delivery-date">
@@ -73,6 +82,7 @@ export default function CartProduct({
                 min="1"
                 value={newQuantity}
                 onChange={(e) => setNewQuantity(Number(e.target.value))}
+                onKeyDown={handleKeyDown}
               />
             )}
             <span
