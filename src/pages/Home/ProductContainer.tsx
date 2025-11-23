@@ -3,6 +3,15 @@ import { addToCart } from "../../utils/cart.js";
 import checkMark from "../../assets/images/icons/checkmark.png";
 import "./ProductContainer.css";
 
+interface productContainer {
+  productId: string,
+  name: string,
+  image: string,
+  rating: { stars: number, count: number },
+  price: string,
+  loadCart: CallableFunction
+}
+
 export default function ProductContainer({
   productId,
   name,
@@ -10,16 +19,18 @@ export default function ProductContainer({
   rating,
   price,
   loadCart,
-}) {
+}: productContainer) {
   const [quantity, setQuantity] = useState(1);
-  const addedToCartInfoElem = useRef(null);
+  const addedToCartInfoElem = useRef<HTMLDivElement>(null);
 
-  const handleAddToCart = async (productId, quantity, loadCart) => {
+  const handleAddToCart = async (productId: string, quantity: number, loadCart: CallableFunction) => {
     await addToCart(productId, quantity, loadCart);
 
-    addedToCartInfoElem.current.style.opacity = 1;
+    const addedMessage = addedToCartInfoElem.current;
+
+    addedMessage!.style.opacity = '1';
     setTimeout(() => {
-      addedToCartInfoElem.current.style.opacity = 0;
+      addedMessage!.style.opacity = '0';
     }, 1500);
   };
 

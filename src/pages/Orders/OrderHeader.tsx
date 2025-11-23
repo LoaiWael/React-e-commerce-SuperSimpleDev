@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { formatCurrency } from '../../utils/money'
 import './OrderHeader.css'
 
-export default function OrderHeader({ orderTimeMs, totalCostCents, id }) {
+export default function OrderHeader({ orderTimeMs, totalCostCents, id }: { orderTimeMs: number, totalCostCents: number, id: string }) {
   return (
     <div className="order-header">
       <div className="order-header-left-section">

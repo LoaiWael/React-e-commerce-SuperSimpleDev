@@ -1,8 +1,9 @@
+import type { cartItem } from '../types';
 import Header from '../components/Header';
 import logo from '../assets/images/mobile-logo.png'
 import './NotFoundPage.css';
 
-export default function NotFoundPage({ cart }) {
+export default function NotFoundPage({ cart }: { cart: cartItem[] }) {
   return (
     <>
       <title>Error 404</title>

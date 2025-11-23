@@ -9,13 +9,24 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const [cart, setCart] = useState([]);
+
   const loadCart = async () => {
-    const response = await axios.get("api/cart-items?expand=product");
-    setCart(response.data);
+    try {
+      const response = await axios.get("api/cart-items?expand=product");
+      setCart(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    loadCart();
+    let isMounted = true;
+    const initialLoad = async () => {
+      await loadCart();
+      if (!isMounted) return;
+    }
+    initialLoad();
+    return () => { isMounted = false };
   }, []);
 
   return (

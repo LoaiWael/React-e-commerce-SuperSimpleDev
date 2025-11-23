@@ -3,7 +3,17 @@ import axios from 'axios'
 import { formatCurrency } from '../../utils/money'
 import './DeliveryOption.css'
 
-export default function DeliveryOption({ id, cartItemId, productId, estimatedDeliveryTimeMs, price, deliveryOptionId, loadCart }) {
+export interface deliveryOptionsCard {
+  id: number,
+  cartItemId: number,
+  productId: string,
+  estimatedDeliveryTimeMs: number,
+  price: number,
+  deliveryOptionId: number,
+  loadCart: CallableFunction
+}
+
+export default function DeliveryOption({ id, cartItemId, productId, estimatedDeliveryTimeMs, price, deliveryOptionId, loadCart }: deliveryOptionsCard) {
   const updateDeliveryOption = async () => {
     await axios.put(`/api/cart-items/${productId}`, {
       deliveryOptionId: id

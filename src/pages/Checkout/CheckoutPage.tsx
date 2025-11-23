@@ -4,10 +4,11 @@ import CheckoutHeader from "./CheckoutHeader";
 import CartProduct from "./CartProduct";
 import PaymentSummary from "./PaymentSummary";
 import { calculateCartQuantity } from "../../utils/cart";
+import type { paymentSummary, cartItem } from "../../types";
 import "./CheckoutPage.css";
 
-export default function CheckoutPage({ cart, loadCart }) {
-  const [paymentSummary, setPaymentSummary] = useState({});
+export default function CheckoutPage({ cart, loadCart }: { cart: cartItem[], loadCart: CallableFunction }) {
+  const [paymentSummary, setPaymentSummary] = useState<paymentSummary>({} as paymentSummary);
   const [deliveryOptions, setDeliveryOptions] = useState([]);
 
   useEffect(() => {
@@ -46,9 +47,9 @@ export default function CheckoutPage({ cart, loadCart }) {
                 key={item.id}
                 cartItemId={item.id}
                 productId={item.productId}
-                productName={item.product.name}
-                productImage={item.product.image}
-                productPriceCents={item.product.priceCents}
+                productName={item.product!.name}
+                productImage={item.product!.image}
+                productPriceCents={item.product!.priceCents}
                 quantity={item.quantity}
                 deliveryOptionId={item.deliveryOptionId}
                 deliveryOptions={deliveryOptions}
@@ -58,9 +59,7 @@ export default function CheckoutPage({ cart, loadCart }) {
           </div>
           <div className="payment-summary">
             <PaymentSummary
-              paymentSummary={paymentSummary}
-              cart={cart}
-              deliveryOptions={deliveryOptions}
+              paymentSummary={paymentSummary as paymentSummary}
               loadCart={loadCart}
             />
           </div>

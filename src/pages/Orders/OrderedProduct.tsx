@@ -3,6 +3,15 @@ import dayjs from "dayjs";
 import { addToCart } from "../../utils/cart";
 import buyAgainIcon from "../../assets/images/icons/buy-again.png";
 import "./OrderedProduct.css";
+import type { product } from "../../types";
+
+interface orderedProduct {
+  orderId: string,
+  estimatedDeliveryTimeMs: number,
+  productDetails: product,
+  quantity: number,
+  loadCart: CallableFunction
+}
 
 export default function OrderedProduct({
   orderId,
@@ -10,7 +19,7 @@ export default function OrderedProduct({
   productDetails,
   quantity,
   loadCart,
-}) {
+}: orderedProduct) {
   return (
     <>
       <div className="product-image-container">

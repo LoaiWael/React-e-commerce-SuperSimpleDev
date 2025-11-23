@@ -1,9 +1,22 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 import dayjs from "dayjs";
 import axios from "axios";
 import DeliveryOption from "./DeliveryOption";
 import { formatCurrency } from "../../utils/money";
+import type { deliveryOption } from '../../types'
 import "./CartProduct.css";
+
+interface cartProduct {
+  cartItemId: number,
+  productId: string,
+  productName: string,
+  productImage: string,
+  productPriceCents: number,
+  quantity: number,
+  deliveryOptions: deliveryOption[],
+  deliveryOptionId: string,
+  loadCart: CallableFunction
+}
 
 export default function CartProduct({
   cartItemId,
@@ -15,10 +28,10 @@ export default function CartProduct({
   deliveryOptions,
   deliveryOptionId,
   loadCart,
-}) {
+}: cartProduct) {
   const [wantUpdateQuantity, setWantUpdateQuantity] = useState(false);
   const [newQuantity, setNewQuantity] = useState(quantity);
-  const currentQuantityElem = useRef(null);
+  const currentQuantityElem = useRef<HTMLDivElement>(null);
 
   const deleteCartProduct = async () => {
     await axios.delete(`/api/cart-items/${productId}`);
@@ -33,19 +46,19 @@ export default function CartProduct({
         });
         await loadCart();
       }
-      currentQuantityElem.current.style.display = "unset";
+      (currentQuantityElem.current!).style.display = "unset";
       setWantUpdateQuantity(false);
     } else {
-      currentQuantityElem.current.style.display = "none";
+      (currentQuantityElem.current!).style.display = "none";
       setWantUpdateQuantity(true);
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key == "Enter") {
-      updateQuantity(Number(e.target.value));
+      updateQuantity();
     } else if (e.key == "Escape") {
-      currentQuantityElem.current.style.display = "unset";
+      (currentQuantityElem.current!).style.display = "unset";
       setWantUpdateQuantity(false);
     }
   };
@@ -107,12 +120,12 @@ export default function CartProduct({
           {deliveryOptions.map((option) => (
             <DeliveryOption
               key={option.id}
-              id={option.id}
+              id={+option.id}
               productId={productId}
               cartItemId={cartItemId}
-              estimatedDeliveryTimeMs={option.estimatedDeliveryTimeMs}
+              estimatedDeliveryTimeMs={option.estimatedDeliveryTimeMs!}
               price={option.priceCents}
-              deliveryOptionId={deliveryOptionId}
+              deliveryOptionId={+deliveryOptionId}
               loadCart={loadCart}
             />
           ))}

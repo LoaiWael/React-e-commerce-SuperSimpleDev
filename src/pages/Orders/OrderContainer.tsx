@@ -1,6 +1,11 @@
 import OrderHeader from "./OrderHeader";
 import OrderedProduct from "./OrderedProduct";
 import "./OrderContainer.css";
+import type { order } from "../../types";
+
+interface orderContainer extends order {
+  loadCart: CallableFunction
+}
 
 export default function OrderContainer({
   id,
@@ -8,7 +13,7 @@ export default function OrderContainer({
   totalCostCents,
   products,
   loadCart,
-}) {
+}: orderContainer) {
   return (
     <div className="order-container">
       <OrderHeader
@@ -22,8 +27,8 @@ export default function OrderContainer({
           <OrderedProduct
             key={list.productId}
             orderId={id}
-            estimatedDeliveryTimeMs={list.estimatedDeliveryTimeMs}
-            productDetails={list.product}
+            estimatedDeliveryTimeMs={+list.estimatedDeliveryTimeMs!}
+            productDetails={list.product!}
             quantity={list.quantity}
             loadCart={loadCart}
           />

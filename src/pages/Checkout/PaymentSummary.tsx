@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router'
 import { formatCurrency } from '../../utils/money'
+import type { paymentSummary } from '../../types'
 import './PaymentSummary.css'
 
-export default function PaymentSummary({ paymentSummary, loadCart }) {
+export default function PaymentSummary({ paymentSummary, loadCart }: { paymentSummary: paymentSummary, loadCart: CallableFunction }) {
   const navigate = useNavigate();
 
   const placeOrder = async () => {

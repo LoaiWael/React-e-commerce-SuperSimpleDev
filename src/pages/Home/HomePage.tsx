@@ -4,10 +4,11 @@ import axios from "axios";
 import Header from "../../components/Header";
 import ProductContainer from "./ProductContainer";
 import { formatCurrency } from "../../utils/money";
+import type { cartItem, product } from "../../types";
 import "./HomePage.css";
 
-export default function HomePage({ cart, loadCart }) {
-  const [products, setProducts] = useState([]);
+export default function HomePage({ cart, loadCart }: { cart: cartItem[], loadCart: CallableFunction }) {
+  const [products, setProducts] = useState<product[]>([]);
   const [searchParams] = useSearchParams();
 
   const search = searchParams.get("search");
@@ -40,7 +41,6 @@ export default function HomePage({ cart, loadCart }) {
               name={product.name}
               rating={product.rating}
               price={formatCurrency(product.priceCents)}
-              keywords={product.keywords}
               loadCart={loadCart}
             />
           ))}

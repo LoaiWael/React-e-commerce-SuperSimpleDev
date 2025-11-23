@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { NavLink, useNavigate, useSearchParams } from "react-router";
 import { calculateCartQuantity } from "../utils/cart";
+import type { cartItem } from "../types";
 import logoWhite from "../assets/images/logo-white.png";
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
 import "./Header.css";
 
-export default function Header({ cart }) {
+export default function Header({ cart }: { cart: cartItem[] }) {
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const navigate = useNavigate();

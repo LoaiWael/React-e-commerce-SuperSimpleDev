@@ -3,9 +3,10 @@ import axios from "axios";
 import OrderContainer from "./OrderContainer";
 import Header from "../../components/Header";
 import "./OrdersPage.css";
+import type { cartItem, order } from "../../types";
 
-export default function OrdersPage({ cart, loadCart }) {
-  const [orders, setOrders] = useState([]);
+export default function OrdersPage({ cart, loadCart }: { cart: cartItem[], loadCart: CallableFunction }) {
+  const [orders, setOrders] = useState<order[]>();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -27,7 +28,7 @@ export default function OrdersPage({ cart, loadCart }) {
         <div className="page-title">Your Orders</div>
 
         <div className="orders-grid">
-          {orders.map((order) => (
+          {orders?.map((order) => (
             <OrderContainer
               key={order.id}
               id={order.id}
